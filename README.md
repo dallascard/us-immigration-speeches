@@ -1,8 +1,7 @@
 
-# US Immigration Speeches
+# Replication Code and Data
 
-
-This repo collects together the main scripts used for the data preprocessing and analysis in "Computational Analysis of 140 Years of U.S. Political Speeches Reveals More Positive but Increasingly Polarized Framing of Immigration".
+This repo collects together the main scripts used for the data preprocessing and analysis in "Computational analysis of 140 years of US political speeches reveals more positive but increasingly polarized framing of immigration".
 
 Sufficient scripts and processed data are included in the Release to reproduce the figures and findings in the main paper.
 
@@ -44,16 +43,17 @@ Note that all scripts in this repo should be run from the main directory using t
 
 There are three main sources of data for this project, which are all publicly available from external sources.
 
-The primary source for Congressional data is the Stanford copy of the Congressional Record (`https://data.stanford.edu/congress_text`). From this, we use the Hein Bound edition for congresses 43 through 111.
+The primary source for Congressional data is the Stanford copy of the Congressional Record [https://data.stanford.edu/congress_text](https://data.stanford.edu/congress_text). From this, we use the Hein Bound edition for congresses 43 through 111.
 
 For more recent Congresses (104 through 116) we use the scripts in the USCR repo: https://github.com/unitedstates/congressional-record/
 
-For Presidential data, we scrape data from the American Presidency Project using scripts in the `app` part of this repo: https://github.com/dallascard/scrapers
+For Presidential data, we scrape data from the [American Presidency Project](https://www.presidency.ucsb.edu/) using scripts in the `app` part of this repo: https://github.com/dallascard/scrapers
 
 Additional tone annotations from the Media Frames Corpus are included in this repo.
 
 For population numbers, we use a combination of sources, as described in the paper. A combined file is included in the Release for this repo. 
 
+Processed data which are too large to be included in the source files for this repo, including trained models and model predictions, are available for download in the [latest release](https://github.com/dallascard/us-immigration-speeches/releases).
 
 ### Preprocessing:
 
@@ -223,3 +223,17 @@ For Frame comparison for Europe vs Latin America (in SI):
 
 For public opinion and SEI analyses (in SI), refer to `public_opinion_and_sei`
 
+## Citation
+
+To cite this respository or the data contained herein, please use:
+
+Dallas Card, Serina Chang, Chris Becker, Julia Mendelsohn, Rob Voigt, Leah Boustan, Ran Abramitzky, and Dan Jurafsky. Replication code and data for "Computational analysis of 140 years of US political speeches reveals more positive but increasingly polarized framing of immigration" [dataset] (2022). https://github.com/dallascard/us-immigration-speeches/
+
+```
+@article{card.2022.immdata,
+  author = {Dallas Card and Serina Chang and Chris Becker and Julia Mendelsohn and Rob Voigt and Leah Boustan and Ran Abramitzky and Dan Jurafsky},
+  title = {Replication code and data for "Computational analysis of 140 years of US political speeches reveals more positive but increasingly polarized framing of immigration" [dataset]},
+  year=2022,
+  url={https://github.com/dallascard/us-immigration-speeches/}
+}
+```
