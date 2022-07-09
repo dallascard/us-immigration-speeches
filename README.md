@@ -232,8 +232,8 @@ Dallas Card, Serina Chang, Chris Becker, Julia Mendelsohn, Rob Voigt, Leah Boust
 ```
 @article{card.2022.immdata,
   author = {Dallas Card and Serina Chang and Chris Becker and Julia Mendelsohn and Rob Voigt and Leah Boustan and Ran Abramitzky and Dan Jurafsky},
-  title = {Replication code and data for "Computational analysis of 140 years of US political speeches reveals more positive but increasingly polarized framing of immigration" [dataset]},
+  title = {Replication code and data for ``{C}omputational analysis of 140 years of {US} political speeches reveals more positive but increasingly polarized framing of immigration'' [dataset]},
   year=2022,
-  url={https://github.com/dallascard/us-immigration-speeches/}
+  journal={https://github.com/dallascard/us-immigration-speeches/}
 }
 ```
