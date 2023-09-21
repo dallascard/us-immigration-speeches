@@ -7,7 +7,7 @@ from optparse import OptionParser
 import numpy as np
 import pandas as pd
 
-from annotation_scripts.measure_agreement import levenshtein_distance
+from annotations.measure_agreement import levenshtein_distance
 
 
 # Collect all annotations and export one per line (duplicating text)
