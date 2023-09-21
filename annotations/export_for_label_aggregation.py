@@ -17,13 +17,14 @@ from annotations.measure_agreement import levenshtein_distance
 def main():
     usage = "%prog"
     parser = OptionParser(usage=usage)
-    #parser.add_option('--issue', type=str, default='immigration',
-    #                  help='Issue: default=%default')
+    parser.add_option('--basedir', type=str, default='../us-immigration-data/data/annotations/relevance_and_tone/',
+                      help='Base dir: default=%default')
     parser.add_option('--subset', type=str, default='early',
                       help='Subset to tokenize [early|mid|modern]: default=%default')
 
     (options, args) = parser.parse_args()
 
+    basedir = options.basedir
     subset = options.subset
 
     if subset == 'modern':
@@ -41,7 +42,9 @@ def main():
     else:
         raise ValueError("--subset must be early, mid, or modern")
 
-    outdir = os.path.join('data', subset)
+    outdir = os.path.join(basedir, subset)
+    if not os.path.exists(outdir):
+        os.makedirs(outdir)
 
     renames = ['segment', 'congress', 'year', 'text', 'immigration', 'topic', 'tone', 'character', 'notes']
 
@@ -57,9 +60,9 @@ def main():
 
         dfs[r] = {}
         if r < 10:
-            files = glob.glob('data/round_0' + str(r) + '*/*.tsv')
+            files = glob.glob(os.path.join(outdir, 'round_0' + str(r) + '*/*.tsv'))
         else:
-            files = glob.glob('data/round_' + str(r) + '*/*.tsv')
+            files = glob.glob(os.path.jon(outdir, 'round_' + str(r) + '*/*.tsv'))
         print(r, len(files), files)
         for infile in files:
             basename = os.path.basename(infile)
