@@ -62,7 +62,7 @@ def main():
         if r < 10:
             files = glob.glob(os.path.join(outdir, 'round_0' + str(r) + '*/*.tsv'))
         else:
-            files = glob.glob(os.path.jon(outdir, 'round_' + str(r) + '*/*.tsv'))
+            files = glob.glob(os.path.join(outdir, 'round_' + str(r) + '*/*.tsv'))
         print(r, len(files), files)
         for infile in files:
             basename = os.path.basename(infile)
