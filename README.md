@@ -66,6 +66,7 @@ For the Hein Bound data:
 
 For USCR:
 
+- `uscr/download_legislator_data.py` to download the information on all legislators
 - `uscr/export_speeches.py`: export the USCR data to .jsonlist files
 - `parsing/preprocess_uscr.py`: adjust the text of USCR to more closely match the Gentzkow data (remove apostrophes, hyphens and speaker names)
 - `parsing/tokenize_uscr.py`: output tokenized version of USCR (sentences and tokens)
