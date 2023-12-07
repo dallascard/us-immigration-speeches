@@ -14,6 +14,8 @@ def main():
     parser = OptionParser(usage=usage)
     parser.add_option('--first-year', type=int, default=1995,
                       help='First year: default=%default')
+    parser.add_option('--last-year', type=int, default=2020,
+                      help='First year: default=%default')
     #parser.add_option('--by-issue', action="store_true", default=False,
     #                  help='Divide data by issue: default=%default')
 
@@ -23,6 +25,7 @@ def main():
     outdir = args[1]
 
     first_year = options.first_year
+    last_year = options.last_year
 
     if not os.path.exists(outdir):
         os.makedirs(outdir)
@@ -49,7 +52,7 @@ def main():
 
     outlines_by_congress = defaultdict(list)
 
-    for year in (range(first_year, 2021)):
+    for year in (range(first_year, last_year+1)):
         files = sorted(glob(os.path.join(basedir, str(year), '*', 'json', '*.json')))
         print(year, len(files))
         for infile in tqdm(files):
