@@ -21,7 +21,7 @@ def main():
     if not os.path.exists(outdir):
         os.makedirs(outdir)
 
-    url = 'https://theunitedstates.io/congress-legislators/legislators-historical.json'
+    url = 'https://unitedstates.github.io/congress-legislators/legislators-historical.json'
     outfile = os.path.join(outdir, 'legislators-historical.json')    
     print("Downloading", url, "to", outfile)
     urllib.request.urlretrieve(url, outfile)
@@ -31,7 +31,7 @@ def main():
     print(len(legislators), 'historical legislators')
 
     print("Downloading", url, "to", outfile)
-    url = 'https://theunitedstates.io/congress-legislators/legislators-current.json'
+    url = 'https://unitedstates.github.io/congress-legislators/legislators-current.json'
     outfile = os.path.join(outdir, 'legislators-current.json')    
     urllib.request.urlretrieve(url, outfile)
 
