@@ -28,6 +28,10 @@ def main():
     outfile = options.outfile
     use_sents = options.use_sents
 
+    outdir = os.path.dirname(outfile)
+    if not os.path.exists(outdir):
+        os.makedirs(outdir)
+
     first = 104
     last = 116
     files = []

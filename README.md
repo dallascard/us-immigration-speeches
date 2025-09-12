@@ -43,7 +43,7 @@ Note that all scripts in this repo should be run from the main directory using t
 
 There are three main sources of data for this project, which are all publicly available from external sources.
 
-The primary source for Congressional data is the Stanford copy of the Congressional Record [https://data.stanford.edu/congress_text](https://data.stanford.edu/congress_text). From this, we use the Hein Bound edition for congresses 43 through 111.
+The primary source for Congressional data is the Stanford copy of the Congressional Record [https://data.stanford.edu/congress_text](https://data.stanford.edu/congress_text). From this, we use the Hein Bound and Hein daily editions for congresses 43 through 114.
 
 For more recent Congresses (104 through 116) we use the scripts in the USCR repo: https://github.com/unitedstates/congressional-record/
 
@@ -61,8 +61,8 @@ There are parallel scripts for processing each part of the data. Steps include p
 
 For the Hein Bound data:
 
-- `parsing/tokenize_hein_bound.py`: tokenize hein-bound using spacy  (also drop speeches from one day with corrupted data, and repair false sentence breaks)
-- `parsing/rejoin_into_pieces_by_congress.py`: this script has two purposes: split each speech into one json per sentence, or one json per block of text (up to some limit)
+- `python -m parsing.tokenize_hein`: tokenize the Heind data (from Stanford) using spacy. Also drop speeches from one day with corrupted data, and repair false sentence breaks. THIS WILL TAKE A LONG TIME. You will need to set the `--hein-bound-dir` `--hein-daily-dir`, and `--outdir` command line arguments.
+- `python -m parsing.rejoin_into_pieces_by_congress`: this script has two purposes: split each speech into one json per sentence, or one json per block of text (up to some limit)
 
 For USCR:
 
@@ -84,10 +84,10 @@ For Presidential data:
 
 As a first step, we selected speech segments that could be about immigration using keywords, which we refer to as "keyword segments":
 
-- `speech_selection/export_segments_early_with_overlap.py`: export segments using the early era keywords, with some overlap to the middle era
+- `speech_selection/export_keyword_segments_early_with_overlap.py`: export segments using the early era keywords, with some overlap to the middle era
 - `speech_selection/export_segments_mid_with_overlap.py`: export segments using the middle era keywords, with some overlap to the early and modern eras
 - `speech_selection/export_segments_modern_with_overlap.py`: export segments using the modern era keywords, with some overlap to the middle era
-- `speech_selection/export_segments_uscr.py`: export segments from USCR
+- `speech_selection/export_keyword_segments_uscr.py`: export segments from USCR
 
 We then combined these into batches, and collected annotations:
 
