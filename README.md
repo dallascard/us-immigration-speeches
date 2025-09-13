@@ -12,13 +12,12 @@ To replicate analysis and plots with processed data included in Release, jump to
 
 ### Requirements:
 
-The following python packages are used in this repo
-
+The following packages are used in this repo:
+- spacy=2.3.5
 - shap
 - tqdm
 - numpy
 - scipy
-- spacy
 - torch
 - gensim
 - pandas
@@ -29,7 +28,6 @@ The following python packages are used in this repo
 - scikit-learn
 - statsmodels
 - transformers
-
 
 
 ### A Note on Usage:

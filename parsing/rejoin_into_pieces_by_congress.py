@@ -9,7 +9,7 @@ import numpy as np
 def main():
     usage = "%prog outdir"
     parser = OptionParser(usage=usage)
-    parser.add_option('--hein-bound-dir', type=str, default='data/speeches/Congress/hein-bound-tokenized-rejoined',
+    parser.add_option('--hein-bound-dir', type=str, default='data/speeches/Congress/hein-bound-tokenized',
                       help='Issue: default=%default')
     parser.add_option('--hein-daily-dir', type=str, default='data/speeches/Congress/hein-daily-tokenized',
                       help='Issue: default=%default')
