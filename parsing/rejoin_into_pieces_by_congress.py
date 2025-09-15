@@ -4,15 +4,14 @@ from optparse import OptionParser
 
 import numpy as np
 
-# Same as rejoin_into_pieces, except output one file per congress
 
 def main():
-    usage = "%prog outdir"
+    usage = "%prog"
     parser = OptionParser(usage=usage)
-    parser.add_option('--hein-bound-dir', type=str, default='data/speeches/Congress/hein-bound-tokenized',
-                      help='Issue: default=%default')
-    parser.add_option('--hein-daily-dir', type=str, default='data/speeches/Congress/hein-daily-tokenized',
-                      help='Issue: default=%default')
+    parser.add_option('--hein-dir', type=str, default='data/speeches/Congress/hein-tokenized',
+                      help='hein-tokenized directory (outdir from tokenize-hein): default=%default')
+    parser.add_option('--outdir', type=str, default='data/speeches/Congress/hein-segments/',
+                      help='Output directory: default=%default')
     parser.add_option('--first', type=int, default=43,
                       help='First congress: default=%default')
     parser.add_option('--last', type=int, default=114,
@@ -28,10 +27,8 @@ def main():
 
     (options, args) = parser.parse_args()
 
-    outdir = args[0]
-
-    hein_bound_dir = options.hein_bound_dir
-    hein_daily_dir = options.hein_daily_dir
+    hein_dir = options.hein_dir
+    outdir = options.outdir
     first = options.first
     last = options.last
     max_length = options.max
@@ -44,11 +41,9 @@ def main():
 
     for congress in range(first, last+1):
         if congress < 100:
-            infile = os.path.join(hein_bound_dir, 'speeches_0' + str(congress) + '.jsonlist')
-        elif congress > 111:
-            infile = os.path.join(hein_daily_dir, 'speeches_' + str(congress) + '.jsonlist')
+            infile = os.path.join(hein_dir, 'speeches_0' + str(congress) + '.jsonlist')
         else:
-            infile = os.path.join(hein_bound_dir, 'speeches_' + str(congress) + '.jsonlist')
+            infile = os.path.join(hein_dir, 'speeches_' + str(congress) + '.jsonlist')
 
         print(infile)
         with open(infile) as f:

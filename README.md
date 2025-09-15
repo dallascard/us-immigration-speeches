@@ -60,7 +60,7 @@ There are parallel scripts for processing each part of the data. Steps include p
 For the Hein Bound data:
 
 - `python -m parsing.tokenize_hein`: tokenize the Heind data (from Stanford) using spacy. Also drop speeches from one day with corrupted data, and repair false sentence breaks. THIS WILL TAKE A LONG TIME. You will need to set the `--hein-bound-dir` `--hein-daily-dir`, and `--outdir` command line arguments.
-- `python -m parsing.rejoin_into_pieces_by_congress`: this script has two purposes: split each speech into one json per sentence, or one json per block of text (up to some limit)
+- `python -m parsing.rejoin_into_pieces_by_congress`: split speeches into segments. Set `--hein-dir` to `--outdir` from `tokenize_hein`.
 
 For USCR:
 
