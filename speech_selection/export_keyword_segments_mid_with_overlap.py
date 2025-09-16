@@ -12,8 +12,8 @@ from speech_selection.query_terms import mid
 def main():
     usage = "%prog"
     parser = OptionParser(usage=usage)
-    parser.add_option('--hein-bound-dir', type=str, default='data/speeches/Congress/hein-bound_tokenized/',
-                      help='Hein bound input directory: default=%default')
+    parser.add_option('--hein-dir', type=str, default='data/speeches/Congress/hein-tokenized/',
+                      help='Directory with tokenized Hein files: default=%default')
     parser.add_option('--outfile', type=str, default='data/speeches/Congress/keyword_segments/keyword_segments_70-88.jsonlist',
                       help='Output directory: default=%default')
     parser.add_option('--use-sents', action="store_true", default=False,
@@ -21,7 +21,7 @@ def main():
 
     (options, args) = parser.parse_args()
 
-    hein_bound_dir = options.hein_bound_dir
+    hein_dir = options.hein_dir
     outfile = options.outfile
     use_sents = options.use_sents
 
@@ -30,10 +30,10 @@ def main():
         os.makedirs(outdir)
 
     first = 70
-    last_bound = 88
+    last = 88
     files = []
-    for congress in range(first, last_bound+1):
-        files.append(os.path.join(hein_bound_dir, 'speeches_' + str(congress).zfill(3) + '.jsonlist'))
+    for congress in range(first, last+1):
+        files.append(os.path.join(hein_dir, 'speeches_' + str(congress).zfill(3) + '.jsonlist'))
     files.sort()
     print(len(files))
 

@@ -1,12 +1,9 @@
 import os
-import re
 import json
-import string
 from glob import glob
 from optparse import OptionParser
 from collections import defaultdict, Counter
 
-import numpy as np
 from tqdm import tqdm
 
 from speech_selection.common import match_tokens
@@ -16,10 +13,8 @@ from speech_selection.query_terms import modern
 def main():
     usage = "%prog"
     parser = OptionParser(usage=usage)
-    parser.add_option('--hein-bound-dir', type=str, default='data/speeches/Congress/hein-bound_tokenized/',
-                      help='Hein bound input directory: default=%default')
-    parser.add_option('--hein-daily-dir', type=str, default='data/speeches/Congress/hein-daily_tokenized/',
-                      help='Hein daily input directory: default=%default')
+    parser.add_option('--hein-dir', type=str, default='data/speeches/Congress/hein-tokenized/',
+                      help='Directory with tokenized Hein files: default=%default')
     parser.add_option('--outfile', type=str, default='data/speeches/Congress/keyword_segments/keyword_segments_85-114.jsonlist',
                       help='Output directory: default=%default')
     parser.add_option('--use-sents', action="store_true", default=False,
@@ -27,8 +22,7 @@ def main():
 
     (options, args) = parser.parse_args()
 
-    hein_bound_dir = options.hein_bound_dir
-    hein_daily_dir = options.hein_daily_dir
+    hein_dir = options.hein_dir
     outfile = options.outfile
     use_sents = options.use_sents
 
@@ -37,19 +31,13 @@ def main():
         os.makedirs(outdir)
 
     first = 85
-    last_bound = 111
-    last_daily = 114
+    last = 114
     files = []
-    for congress in range(first, last_bound+1):
+    for congress in range(first, last+1):
         if congress < 100:
-            files.append(os.path.join(hein_bound_dir, 'speeches_0' + str(congress) + '.jsonlist'))
+            files.append(os.path.join(hein_dir, 'speeches_0' + str(congress) + '.jsonlist'))
         else:
-            files.append(os.path.join(hein_bound_dir, 'speeches_' + str(congress) + '.jsonlist'))
-    for congress in range(last_bound+1, last_daily+1):
-        if congress < 100:
-            files.append(os.path.join(hein_daily_dir, 'speeches_0' + str(congress) + '.jsonlist'))
-        else:
-            files.append(os.path.join(hein_daily_dir, 'speeches_' + str(congress) + '.jsonlist'))
+            files.append(os.path.join(hein_dir, 'speeches_' + str(congress) + '.jsonlist'))
     files.sort()
     print(len(files))
 
