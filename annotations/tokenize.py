@@ -48,9 +48,9 @@ def main():
 
     for r in range(first_round, last_round+1):
         if r < 10:
-            files = glob.glob(basedir + '/round_0' + str(r) + '*/*.csv')
+            files = glob.glob(basedir + '/round_0' + str(r) + '*/*.tsv')
         else:
-            files = glob.glob(basedir + '/round_' + str(r) + '*/*.csv')
+            files = glob.glob(basedir + '/round_' + str(r) + '*/*.tsv')
         for f in files:
             df = pd.read_csv(f, header=0, index_col=0)
             item_ids = df['id'].values
