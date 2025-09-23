@@ -52,7 +52,7 @@ def main():
         else:
             files = glob.glob(basedir + '/round_' + str(r) + '*/*.tsv')
         for f in files:
-            df = pd.read_csv(f, header=0, index_col=0)
+            df = pd.read_csv(f, header=0, index_col=0, sep='\t')
             item_ids = df['id'].values
             texts = df['text'].values
             congresses = df['congress'].values
