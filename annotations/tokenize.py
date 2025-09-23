@@ -14,13 +14,14 @@ from tqdm import tqdm
 def main():
     usage = "%prog"
     parser = OptionParser(usage=usage)
-    #parser.add_option('--issue', type=str, default='immigration',
-    #                  help='Issue: default=%default')
+    parser.add_option('--basedir', type=str, default='data/annotations/relevance_and_tone/',
+                      help='Basedir with data from repo distribution: default=%default')
     parser.add_option('--subset', type=str, default='early',
                       help='Subset to tokenize [early|mid|modern]: default=%default')
 
     (options, args) = parser.parse_args()
 
+    basedir = options.basedir
     subset = options.subset
 
     if subset == 'modern':
@@ -35,7 +36,7 @@ def main():
     else:
         raise ValueError("--subset must be early, mid, or modern")
 
-    outdir = os.path.join('data', subset)
+    outdir = os.path.join(basedir, subset)
     if not os.path.exists(outdir):
         os.makedirs(outdir)
     outfile = os.path.join(outdir, 'texts.json')
@@ -47,9 +48,9 @@ def main():
 
     for r in range(first_round, last_round+1):
         if r < 10:
-            files = glob.glob('data/round_0' + str(r) + '*/*.csv')
+            files = glob.glob(basedir + '/round_0' + str(r) + '*/*.csv')
         else:
-            files = glob.glob('data/round_' + str(r) + '*/*.csv')
+            files = glob.glob(basedir + '/round_' + str(r) + '*/*.csv')
         for f in files:
             df = pd.read_csv(f, header=0, index_col=0)
             item_ids = df['id'].values
