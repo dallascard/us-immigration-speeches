@@ -89,9 +89,9 @@ As a first step, we selected speech segments that could be about immigration usi
 
 We then combined these into batches, and collected annotations:
 
-- `speech_selection/make_batches_early.py` etc: combine segments into batches for annotation
-- `speech_selection/make_batches_mid.py` etc: combine segments into batches for annotation
-- `speech_selection/make_batches_modern.py` etc: combine segments into batches for annotation
+- `python -m speech_selection.make_batches_early` etc: combine segments into batches for annotation
+- `python -m speech_selection.make_batches_mid` etc: combine segments into batches for annotation
+- `python -m speech_selection.make_batches_modern` etc: combine segments into batches for annotation
 
 ### Annotations
 

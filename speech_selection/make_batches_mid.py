@@ -12,9 +12,9 @@ import pandas as pd
 def main():
     usage = "%prog"
     parser = OptionParser(usage=usage)
-    parser.add_option('--indir', type=str, default='data/speeches/Congressfor_annotation_mid/',
-                      help='Input dir: default=%default')
-    parser.add_option('--basedir', type=str, default='data/speeches/Congress/for_annotation_mid/rounds/',
+    parser.add_option('--infile', type=str, default='data/keyword-segments/keyword_segments_70-88.jsonlist',
+                      help='Infile: default=%default')
+    parser.add_option('--basedir', type=str, default='data/for_annotation_mid/rounds/',
                       help='Base output dir: default=%default')
     parser.add_option('--annotators', type=int, default=4,
                       help='Number of annotators: default=%default')
@@ -29,15 +29,14 @@ def main():
 
     (options, args) = parser.parse_args()
 
-    indir = options.indir
+    infile = options.infile
     basedir = options.basedir
     n_annotators = options.annotators
     n_annotators_per_item = options.per_item
     items_per_batch = options.per_batch
     start = options.start
 
-    files = glob.glob(indir + '*.jsonlist')
-    files.sort()
+    files = [infile]
 
     np.random.seed(0)
 
