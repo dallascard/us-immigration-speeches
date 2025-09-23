@@ -11,9 +11,9 @@ import spacy
 def main():
     usage = "%prog"
     parser = OptionParser(usage=usage)
-    parser.add_option('--indir', type=str, default='data/speeches/Congress/uscr_processed/',
+    parser.add_option('--indir', type=str, default='data/uscr-preprocessed/',
                       help='Processed USCR dir: default=%default')
-    parser.add_option('--outdir', type=str, default='data/speeches/Congress/uscr_tokenized/',
+    parser.add_option('--outdir', type=str, default='data/uscr-tokenized/',
                       help='Output dir: default=%default')
     parser.add_option('--first', type=int, default=104,
                       help='First congress [104-116]: default=%default')

@@ -9,9 +9,9 @@ import numpy as np
 def main():
     usage = "%prog"
     parser = OptionParser(usage=usage)
-    parser.add_option('--uscr-dir', type=str, default='data/speeches/Congress/uscr_tokenized',
+    parser.add_option('--uscr-dir', type=str, default='data/uscr-tokenized/',
                       help='Issue: default=%default')
-    parser.add_option('--outdir', type=str, default='data/speeches/Congress/uscr_segments',
+    parser.add_option('--outdir', type=str, default='data/uscr-segments/',
                       help='Issue: default=%default')
     parser.add_option('--first', type=int, default=104,
                       help='First congress: default=%default')

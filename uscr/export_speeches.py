@@ -12,6 +12,10 @@ from tqdm import tqdm
 def main():
     usage = "%prog uscr_raw_dir outdir"
     parser = OptionParser(usage=usage)
+    parser.add_option('--uscr-raw-dir', type=str, default='../congressional-record/output/',
+                      help='Download directory for USCR repo: default=%default')
+    parser.add_option('--outdir', type=str, default='data/uscr-raw',
+                      help='Download directory for USCR repo: default=%default')
     parser.add_option('--first-year', type=int, default=1995,
                       help='First year: default=%default')
     parser.add_option('--last-year', type=int, default=2020,
@@ -21,8 +25,8 @@ def main():
 
     (options, args) = parser.parse_args()
 
-    basedir = args[0]
-    outdir = args[1]
+    basedir = options.uscr_raw_dir
+    outdir = options.outdir
 
     first_year = options.first_year
     last_year = options.last_year

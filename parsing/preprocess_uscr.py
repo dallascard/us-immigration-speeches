@@ -13,11 +13,15 @@ from parsing.common import normalize_to_stanford
 def main():
     usage = "%prog uscr_dir outdir"
     parser = OptionParser(usage=usage)
+    parser.add_option('--indir', type=str, default='data/uscr-raw/',
+                      help='Download directory for USCR repo: default=%default')
+    parser.add_option('--outdir', type=str, default='data/uscr-preprocessed/',
+                      help='Download directory for USCR repo: default=%default')
 
     (options, args) = parser.parse_args()
 
-    indir = args[0]
-    outdir = args[1]
+    indir = options.indir
+    outdir = options.outdir
 
     if not os.path.exists(outdir):
         os.makedirs(outdir)

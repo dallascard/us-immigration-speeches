@@ -64,11 +64,11 @@ For the Hein Bound data:
 
 For USCR:
 
-- `uscr/download_legislator_data.py` to download the information on all legislators
-- `uscr/export_speeches.py`: export the USCR data to .jsonlist files
-- `parsing/preprocess_uscr.py`: adjust the text of USCR to more closely match the Gentzkow data (remove apostrophes, hyphens and speaker names)
-- `parsing/tokenize_uscr.py`: output tokenized version of USCR (sentences and tokens)
-- `parsing/rejoin_into_pieces_by_congress_uscr.py`: rejoin tokenized sentences into longer segments for classification
+- `python -m uscr.download_legislator_data` to download the information on all legislators
+- `python -m uscr.export_speeches`: export the USCR data to .jsonlist files
+- `python -m parsing.preprocess_uscr`: adjust the text of USCR to more closely match the Gentzkow data (remove apostrophes, hyphens and speaker names)
+- `python -m parsing.tokenize_uscr`: output tokenized version of USCR (sentences and tokens)
+- `python -m parsing.rejoin_into_pieces_by_congress_uscr`: rejoin tokenized sentences into longer segments for classification
 
 For Presidential data:
 
