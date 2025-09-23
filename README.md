@@ -83,9 +83,9 @@ For Presidential data:
 As a first step, we selected speech segments that could be about immigration using keywords, which we refer to as "keyword segments":
 
 - `python -m speech_selection.export_keyword_segments_early_with_overlap`: export segments using the early era keywords, with some overlap to the middle era
-- `speech_selection/export_segments_mid_with_overlap.py`: export segments using the middle era keywords, with some overlap to the early and modern eras
-- `speech_selection/export_segments_modern_with_overlap.py`: export segments using the modern era keywords, with some overlap to the middle era
-- `speech_selection/export_keyword_segments_uscr.py`: export segments from USCR
+- `python -m speech_selection.export_segments_mid_with_overlap`: export segments using the middle era keywords, with some overlap to the early and modern eras
+- `python -m speech_selection.export_segments_modern_with_overlap`: export segments using the modern era keywords, with some overlap to the middle era
+- `python -m speech_selection.export_keyword_segments_uscr`: export segments from USCR
 
 We then combined these into batches, and collected annotations:
 

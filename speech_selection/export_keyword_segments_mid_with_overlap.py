@@ -12,9 +12,9 @@ from speech_selection.query_terms import mid
 def main():
     usage = "%prog"
     parser = OptionParser(usage=usage)
-    parser.add_option('--hein-dir', type=str, default='data/speeches/Congress/hein-tokenized/',
+    parser.add_option('--hein-dir', type=str, default='data/hein-tokenized/',
                       help='Directory with tokenized Hein files: default=%default')
-    parser.add_option('--outfile', type=str, default='data/speeches/Congress/keyword_segments/keyword_segments_70-88.jsonlist',
+    parser.add_option('--outfile', type=str, default='data/keyword-segments/keyword_segments_70-88.jsonlist',
                       help='Output directory: default=%default')
     parser.add_option('--use-sents', action="store_true", default=False,
                       help='Use sentences rather than tokens (avoid excess spaces): default=%default')

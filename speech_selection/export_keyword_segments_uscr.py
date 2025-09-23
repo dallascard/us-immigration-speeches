@@ -15,9 +15,9 @@ from speech_selection.query_terms import modern
 def main():
     usage = "%prog"
     parser = OptionParser(usage=usage)
-    parser.add_option('--uscr-dir', type=str, default='data/speeches/Congress/uscr_tokenized/',
+    parser.add_option('--uscr-dir', type=str, default='data/uscr-tokenized/',
                       help='USCR directory: default=%default')
-    parser.add_option('--outfile', type=str, default='data/speeches/Congress/keyword_segments/keyword_segments_uscr_104-116.jsonlist',
+    parser.add_option('--outfile', type=str, default='data/keyword-segments/keyword_segments_uscr_104-116.jsonlist',
                       help='Output directory: default=%default')
     parser.add_option('--use-sents', action="store_true", default=False,
                       help='Use sentences rather than tokens (avoid excess spaces): default=%default')
