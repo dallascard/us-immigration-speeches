@@ -68,8 +68,6 @@ def main():
                 phase = 2
             sample_probs = df['p_immigration'].values
             for i, item_id in enumerate(item_ids):
-                if type(item_id) is not str:
-                    print(r, f, i, item_id, type(item_id))
                 text_by_id[item_id] = {'text': texts[i], 'round': r, 'congress': congresses[i], 'sample_prob': float(sample_probs[i]), 'phase': phase}
         print(r, len(text_by_id))
 
