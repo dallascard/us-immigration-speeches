@@ -44,6 +44,8 @@ def main():
     print("Loading spacy")
     nlp = spacy.load("en_core_web_sm")
 
+    renames = ['segment', 'congress', 'year', 'text', 'immigration', 'topic', 'tone', 'character', 'notes']
+
     text_by_id = {}
 
     for r in range(first_round, last_round+1):
@@ -53,7 +55,10 @@ def main():
             files = glob.glob(basedir + '/round_' + str(r) + '*/*.tsv')
         for f in files:
             df = pd.read_csv(f, header=0, index_col=0, sep='\t')
-            item_ids = df['id'].values
+            columns = list(df.columns)
+            columns[:len(renames)] = renames
+            df.columns = columns            
+            item_ids = df['segment'].values
             texts = df['text'].values
             congresses = df['congress'].values
             if 'p_immigration' not in df.columns:

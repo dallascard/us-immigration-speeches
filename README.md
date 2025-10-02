@@ -101,7 +101,7 @@ To process the annotations:
 
 - `annotations/tokenize.py`:  Collect all the annotated text segments and tokenize with spacy
 - `annotations/export_for_label_aggregation.py`: Collect the annotations and export for aggregating labels (using label-aggregation)
-- `annoations/measure_agreement.py` to measure agreement rates using Krippendorff's alpha
+- `annotations/measure_agreement.py` to measure agreement rates using Krippendorff's alpha
 - Do label aggregation using label-aggregation repo (`github.com/dallascard/label-aggregation`) using Stan with the --no-vigilance option for both relevance and tone
 - `relevance/make_relevance_splits.py`: Collect the tokenizations and estimated label probabilities, and make splits
 - `relevance/make_relevance_splits.py` and `tone.make_tone_splits.py`: Divide the annotated data with inferred labels into train, dev, and test files for model training. For the latter, the additional annotations from MFC should be included using the `--extra-data-file` options, pointed to `data/annotations/relevance_and_tone/mfc/mfc_imm_tone.jsonlist`
