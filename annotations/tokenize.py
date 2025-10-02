@@ -68,7 +68,9 @@ def main():
                 phase = 2
             sample_probs = df['p_immigration'].values
             for i, item_id in enumerate(item_ids):
-                text_by_id[item_id] = {'text': texts[i], 'round': r, 'congress': congresses[i], 'sample_prob': sample_probs[i], 'phase': phase}
+                if type(item_id) is not str:
+                    print(r, f, i, item_id, type(item_id))
+                text_by_id[item_id] = {'text': texts[i], 'round': r, 'congress': congresses[i], 'sample_prob': float(sample_probs[i]), 'phase': phase}
         print(r, len(text_by_id))
 
     lines = {}
@@ -82,7 +84,7 @@ def main():
             tokens.append(sent_tokens)
         lines[item_id] = {'text': text, 'tokens': tokens, 'round': int(data['round']), 'congress': int(data['congress']), 'sample_prob': float(data['sample_prob']), 'phase': int(data['phase'])}
 
-    with open(outfile, 'w') as f:
+    with open(outfile, 'w') as f:        
         json.dump(lines, f, indent=2)
 
 
