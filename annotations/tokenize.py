@@ -54,7 +54,7 @@ def main():
         else:
             files = glob.glob(basedir + '/round_' + str(r) + '*/*.tsv')
         for f in files:
-            df = pd.read_csv(f, header=0, index_col=0, sep='\t')
+            df = pd.read_csv(f, header=0, sep='\t')
             columns = list(df.columns)
             columns[:len(renames)] = renames
             df.columns = columns            
