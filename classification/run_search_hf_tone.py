@@ -3,7 +3,7 @@ from optparse import OptionParser
 
 import numpy as np
 
-from congress.run_folds_hf_tone import run_folds
+from classification.run_folds_hf_tone import run_folds
 
 
 def main():

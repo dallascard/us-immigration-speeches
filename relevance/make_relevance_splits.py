@@ -10,8 +10,12 @@ import numpy as np
 
 
 def main():
-    usage = "%prog texts.json est_item_probs.json"
+    usage = "%prog"
     parser = OptionParser(usage=usage)
+    parser.add_option('--text-file', type=str, default='texts.json',
+                      help='Output of annotations.tokenize: default=%default')
+    parser.add_option('--probs-file', type=str, default='item_probs.json',
+                      help='Output of label-aggregation: default=%default')
     parser.add_option('--partitions', type=int, default=10,
                       help='Number of partitions to create: default=%default')
     parser.add_option('--test', type=int, default=300,
@@ -20,13 +24,13 @@ def main():
                       help='Number of dev examples per partition: default=%default')
     parser.add_option('--seed', type=int, default=42,
                       help='Random seed: default=%default')
-    parser.add_option('--basedir', type=str, default='splits',
+    parser.add_option('--outdir', type=str, default='data/annotations/relevance_and_tone/early/relevance/splits/',
                       help='Base output directory: default=%default')
 
     (options, args) = parser.parse_args()
 
-    data_file = args[0]
-    item_probs_file = args[1]     # estimated label probabilities from label aggregation
+    data_file = options.text_file
+    item_probs_file = options.probs_file     # estimated label probabilities from label aggregation
 
     np.random.seed(options.seed)
     random.seed(options.seed)
@@ -34,7 +38,7 @@ def main():
     partitions = options.partitions
     n_test = options.test
     n_dev = options.dev
-    basedir = options.basedir
+    basedir = options.outdir
 
     # Load the texts
     print("Loading data")

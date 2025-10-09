@@ -4,7 +4,7 @@ from optparse import OptionParser
 import numpy as np
 
 #from bert.run import run
-from congress.run_folds_hf import run_folds
+from classification.run_folds_hf import run_folds
 
 
 # SAME AS run_search, but updating to use stuff in the hf directory, updated to newer version of transformers

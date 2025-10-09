@@ -17,7 +17,7 @@ from annotations.measure_agreement import levenshtein_distance
 def main():
     usage = "%prog"
     parser = OptionParser(usage=usage)
-    parser.add_option('--basedir', type=str, default='../us-immigration-data/data/annotations/relevance_and_tone/',
+    parser.add_option('--basedir', type=str, default='data/annotations/relevance_and_tone/',
                       help='Base dir: default=%default')
     parser.add_option('--subset', type=str, default='early',
                       help='Subset to tokenize [early|mid|modern]: default=%default')

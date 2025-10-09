@@ -99,12 +99,24 @@ Raw annotations for tone and relevance are provided in online data files
 
 To process the annotations:
 
-- `annotations/tokenize.py`:  Collect all the annotated text segments and tokenize with spacy
-- `annotations/export_for_label_aggregation.py`: Collect the annotations and export for aggregating labels (using label-aggregation)
-- `annotations/measure_agreement.py` to measure agreement rates using Krippendorff's alpha
-- Do label aggregation using label-aggregation repo (`github.com/dallascard/label-aggregation`) using Stan with the --no-vigilance option for both relevance and tone
-- `relevance/make_relevance_splits.py`: Collect the tokenizations and estimated label probabilities, and make splits
-- `relevance/make_relevance_splits.py` and `tone.make_tone_splits.py`: Divide the annotated data with inferred labels into train, dev, and test files for model training. For the latter, the additional annotations from MFC should be included using the `--extra-data-file` options, pointed to `data/annotations/relevance_and_tone/mfc/mfc_imm_tone.jsonlist`
+- run the following two scripts three times, with `--subset` equal `early`, `mid`, and `modern`:
+- `python -m annotations.tokenize`:  Collect all the annotated text segments and tokenize with spacy. (Note: in the published data, this step was done with spacy3; using spacy2 will result in slight differences in tokenization).
+- `python -m annotations.export_for_label_aggregation`: Collect the annotations and export for aggregating labels (using label-aggregation)
+- `python -m annotations.measure_agreement` to measure agreement rates using Krippendorff's alpha
+
+### Aggregation
+
+To re-aggregate the annotations (exported above), use the abel-aggregation repo (`github.com/dallascard/label-aggregation`). For this you will need to install `pystan3`, and it is recommended you do so in a separate environment using `uv`. Using that environment, from that project directory, run:
+- `python run_pystan3.py data/annotations/relevance_and_tone/early/relevance_lines.jsonlist data/annotations/relevance_and_tone/early/relevance/ --no-vigilance`
+- `python run_pystan3.py data/annotations/relevance_and_tone/early/tone_lines.jsonlist data/annotations/relevance_and_tone/early/tone/ --no-vigilance`
+- `python run_pystan3.py data/annotations/relevance_and_tone/mid/relevance_lines.jsonlist data/annotations/relevance_and_tone/mid/relevance/ --no-vigilance`
+- `python run_pystan3.py data/annotations/relevance_and_tone/mid/tone_lines.jsonlist data/annotations/relevance_and_tone/mid/tone/ --no-vigilance`
+- `python run_pystan3.py data/annotations/relevance_and_tone/modern/relevance_lines.jsonlist data/annotations/relevance_and_tone/modern/relevance/ --no-vigilance`
+- `python run_pystan3.py data/annotations/relevance_and_tone/modern/tone_lines.jsonlist data/annotations/relevance_and_tone/modern/tone/ --no-vigilance`
+
+Then, back in the project directory for this repo (us-immigration-speeches), using your standard environment, run:
+- `python -m relevance.make_relevance_splits --text-file data/annotations/relevance_and_tone/early/texts.json --probs-file data/annotations/relevance_and_tone/early/relevance/item_probs.json --outdir data/annotations/relevance_and_tone/early/relevance/splits/`: Collect the tokenizations and estimated label probabilities, and make splits. (Repeate changing `early` to `mid`, then `modern`)
+- `python -m relevance.make_tone_splits --extra-data-file data/annotations/relevance_and_tone/mfc/mfc_imm_tone.jsonlist`: Divide the annotated data with inferred labels into train, dev, and test files for model training, and include the additional annotations from Media Frames Corpus
 
 ### Training models
 
