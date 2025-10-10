@@ -853,7 +853,6 @@ def main():
     label_list = sorted(label_counter)
     print(label_list)
     args.num_labels = len(label_list)
-    print("WEIGHTS_NAME", WEIGHTS_NAME)
 
     #if args.add_placeholder_labels:
     #    default_label = label_list[0]
@@ -948,7 +947,7 @@ def main():
         checkpoints = [args.output_dir]
         if args.eval_all_checkpoints:
             checkpoints = list(
-                os.path.dirname(c) for c in sorted(glob.glob(args.output_dir + "/**/" + WEIGHTS_NAME, recursive=True))
+                os.path.dirname(c) for c in sorted(glob.glob(args.output_dir + "/**/" + 'model.safetensors', recursive=True))
             )
             logging.getLogger("transformers.modeling_utils").setLevel(logging.WARN)  # Reduce logging
         logger.info("Evaluate the following checkpoints: %s", checkpoints)
