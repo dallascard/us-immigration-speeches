@@ -853,6 +853,7 @@ def main():
     label_list = sorted(label_counter)
     print(label_list)
     args.num_labels = len(label_list)
+    print("WEIGHTS_NAME", WEIGHTS_NAME)
 
     #if args.add_placeholder_labels:
     #    default_label = label_list[0]
