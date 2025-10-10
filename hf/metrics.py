@@ -167,7 +167,7 @@ def pearson_and_spearman(preds, labels):
     }
 
 
-def compute_metrics(metrics, preds, labels, classes, weights=None, pred_probs=None, true_probs=None, epsilon=1e-6):
+def compute_metrics(metrics, preds, labels, classes, weights=None, pred_probs=None, true_probs=None, epsilon=1e-6, pos_label=1):
     results = {}
     n_classes = len(classes)
     for metric in metrics:
@@ -177,15 +177,15 @@ def compute_metrics(metrics, preds, labels, classes, weights=None, pred_probs=No
         elif metric == 'weighted_accuracy':
             results['weighted_acc'] = weighted_accuracy(preds, labels, weights)
         elif metric == 'f1':
-            results['f1'] = weighted_f1(preds, labels, weights=weights, n_classes=n_classes)
+            results['f1'] = weighted_f1(preds, labels, weights=weights, n_classes=n_classes, pos_label=pos_label)
         elif metric == 'weighted_f1':
-            results['weighted_f1'] = weighted_f1(preds, labels, weights=weights, n_classes=n_classes)
+            results['weighted_f1'] = weighted_f1(preds, labels, weights=weights, n_classes=n_classes, pos_label=pos_label)
         elif metric == 'micro_f1':
-            results['micro_f1'] = weighted_f1(preds, labels, weights=weights, n_classes=n_classes, average='micro')
+            results['micro_f1'] = weighted_f1(preds, labels, weights=weights, n_classes=n_classes, average='micro', pos_label=pos_label)
         elif metric == 'macro_f1':
-            results['macro_f1'] = weighted_f1(preds, labels, weights=weights, n_classes=n_classes, average='macro')
+            results['macro_f1'] = weighted_f1(preds, labels, weights=weights, n_classes=n_classes, average='macro', pos_label=pos_label)
         elif metric == 'per_class_f1':
-            per_class_f1 = f1_score(labels, preds, labels=range(n_classes), average=None, sample_weight=weights)
+            per_class_f1 = f1_score(labels, preds, labels=range(n_classes), average=None, sample_weight=weights, pos_label=pos_label)
             print(per_class_f1)
             for cl in range(n_classes):
                 results['f1-' + classes[cl]] = per_class_f1[cl]
