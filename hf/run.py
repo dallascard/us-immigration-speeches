@@ -968,7 +968,7 @@ def main():
         checkpoints = [args.model_name_or_path]
         if args.eval_all_checkpoints:
             checkpoints = list(
-                os.path.dirname(c) for c in sorted(glob.glob(args.output_dir + "/**/" + WEIGHTS_NAME, recursive=True))
+                os.path.dirname(c) for c in sorted(glob.glob(args.output_dir + "/**/" + 'model.safetensors', recursive=True))
             )
             logging.getLogger("transformers.modeling_utils").setLevel(logging.WARN)  # Reduce logging
         logger.info("Evaluate the following checkpoints: %s", checkpoints)
