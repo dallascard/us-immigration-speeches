@@ -41,7 +41,7 @@ def weighted_f1(pred, true, weights=None, n_classes=2, pos_label=1, average='mic
         elif average == 'macro':
             f1 = f1_score(true, pred, average='macro', labels=range(n_classes), pos_label=pos_label, sample_weight=weights)
         else:
-            f1 = f1_score(true, pred, average='binary', labels=range(n_classes), pos_label=None, sample_weight=weights)
+            f1 = f1_score(true, pred, average='binary', labels=range(n_classes), pos_label=pos_label, sample_weight=weights)
     else:
         if average is None:
             f1 = f1_score(true, pred, average='micro', labels=range(n_classes), pos_label=None, sample_weight=weights)
