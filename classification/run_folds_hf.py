@@ -154,7 +154,7 @@ def run_folds(basedir, seed=42, model_type='bert', model_name_or_path='bert-base
         for d in checkpoint_dirs:
             shutil.rmtree(d)
 
-        model_file = os.path.join(outdir, 'pytorch_model.bin')
+        model_file = os.path.join(outdir, 'pymodel.safetensors')
         try:
             os.remove(model_file)
         except Exception as e:
