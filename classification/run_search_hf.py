@@ -29,7 +29,7 @@ def main():
                       help='Path to model: [bert-base-uncased|roberta-base|...] default=%default')
     parser.add_option('--tokenizer_name', type=str, default='',
                       help='Tokenizer name [''|bert-base-uncased|etc] default=%default')
-    parser.add_option('--basedir', type=str, default='data/speeches/Congress/relevance/',
+    parser.add_option('--basedir', type=str, default='data/speeches/Congress/relevance/splits/',
                       help='Output directory from split_data.py: default=%default')
     #parser.add_option('--transformers-dir', type=str, default='/u/scr/dcard/tools/transformers/',
     #                  help='Transformers dir: default=%default')
