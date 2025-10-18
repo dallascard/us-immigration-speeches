@@ -12,19 +12,22 @@ from relevance.make_relevance_splits_modern import write_to_file
 
 
 def main():
-    usage = "%prog texts.json est_item_probs.json"
+    usage = "%prog"
     parser = OptionParser(usage=usage)
+    parser.add_option('--text-file', type=str, default='texts.json',
+                      help='Output of annotations.tokenize: default=%default')
+    parser.add_option('--probs-file', type=str, default='item_probs.json',
+                      help='Output of label-aggregation: default=%default')
     parser.add_option('--seed', type=int, default=42,
                       help='Random seed: default=%default')
-    parser.add_option('--basedir', type=str, default='data/mid/splits/',
+    parser.add_option('--outdir', type=str, default='data/mid/splits/',
                       help='Base output directory: default=%default')
 
     (options, args) = parser.parse_args()
 
-    data_file = args[0]
-    item_probs_file = args[1]     # estimated label probabilities from label aggregation
-
-    basedir = options.basedir
+    data_file = options.text_file
+    item_probs_file = options.probs_file     # estimated label probabilities from label aggregation
+    basedir = options.outdir
     np.random.seed(options.seed)
     random.seed(options.seed)
 

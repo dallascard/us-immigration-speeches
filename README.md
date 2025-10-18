@@ -115,15 +115,15 @@ To re-aggregate the annotations (exported above), use the abel-aggregation repo 
 - `python run_pystan3.py data/annotations/relevance_and_tone/modern/tone_lines.jsonlist data/annotations/relevance_and_tone/modern/tone/ --no-vigilance`
 
 Then, back in the project directory for this repo (us-immigration-speeches), using your standard environment, run:
-- `python -m relevance.make_relevance_splits --text-file data/annotations/relevance_and_tone/early/texts.json --probs-file data/annotations/relevance_and_tone/early/relevance/item_probs.json --outdir data/annotations/relevance_and_tone/early/relevance/splits/`: Collect the tokenizations and estimated label probabilities, and make splits. (Repeate changing `early` to `mid`, then `modern`)
+- `python -m relevance.make_relevance_splits --text-file data/annotations/relevance_and_tone/early/texts.json --probs-file data/annotations/relevance_and_tone/early/relevance/item_probs.json --outdir data/annotations/relevance_and_tone/early/relevance/splits/`: Collect the tokenizations and estimated label probabilities, and make splits. (Repeat for the other paritions, using `make_relevance_splits_mid` and `make_relevance_splits_modern`)
 - `python -m relevance.make_tone_splits --extra-data-file data/annotations/relevance_and_tone/mfc/mfc_imm_tone.jsonlist`: Divide the annotated data with inferred labels into train, dev, and test files for model training, and include the additional annotations from Media Frames Corpus
 
 ### Training models
 
 Run Roberta models on congressional annotations
 
-- `classification/run_search_hf.py` to search of seeds (in order to estimate performance)
-- `classification/run_final_model.py` to train a final model on all data with one seed
+- `python -m classification.run_search_hf` to search of seeds (in order to estimate performance)
+- `python -m classification.run_final_model` to train a final model on all data with one seed
 - `classification/make_predictions.py` to predict on keyword segments
 - `classification/predict_on_all.py` to predict on all segments from each congress (exported from `parsing.rejoin_into_pieces_by_congress.py`)
 
