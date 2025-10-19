@@ -63,8 +63,7 @@ def main():
             use_label_weights = False
             outdir = os.path.join(basedir, 'relevance_mid', 'basic')
 
-        write_to_file(outdir, 'all', item_ids, data, item_probs, use_label_weights=use_label_weights, train=True, extra_train_lines=False)
-
+        write_to_file(outdir, 'all', item_ids, data, item_probs, use_label_weights=use_label_weights, train=True, extra_train_lines=None)
 
 if __name__ == '__main__':
     main()
