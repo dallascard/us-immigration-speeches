@@ -58,10 +58,13 @@ def main():
 
         if weighting == 'label-weights':
             use_label_weights = True
-            outdir = os.path.join(basedir, 'relevance_mid', 'label-weights')
+            outdir = os.path.join(basedir, 'label-weights')
         else:
             use_label_weights = False
-            outdir = os.path.join(basedir, 'relevance_mid', 'basic')
+            outdir = os.path.join(basedir, 'basic')
+
+        if not os.path.exists(outdir):
+            os.makedirs(outdir)
 
         write_to_file(outdir, 'all', item_ids, data, item_probs, use_label_weights=use_label_weights, train=True, extra_train_lines=None)
 
