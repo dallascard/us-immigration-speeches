@@ -357,14 +357,25 @@ def main():
     for ax in range(nrows):
         plot_bg_fill(axes[ax], periods, lower, upper, party_to_color)
 
-
     ax = 0  # by party
-    plot_percent_diff_line_with_bands(axes[ax], pro_imm_speeches_per_congress, anti_imm_speeches_per_congress, imm_speeches_per_congress, congress_range, years, 'k', label='All speeches', fill_alpha=0.1, line_alpha=0.5, linestyle='-.')
+    plot_percent_diff_line_with_bands(axes[ax], pro_imm_speeches_per_congress, anti_imm_speeches_per_congress, imm_speeches_per_congress, congress_range, years, 'k', label='All speeches', fill_alpha=0.1, line_alpha=0.5, linestyle='-.', csv_out=os.path.join(outdir, 'overall_tone_by_congress.csv'))
     party = 'D'
-    plot_percent_diff_line_with_bands(axes[ax], pro_imm_speeches_per_congress_by_party[party], anti_imm_speeches_per_congress_by_party[party], imm_speeches_per_congress_by_party[party], congress_range, years, party_to_color[party], label='Democrat')
+    plot_percent_diff_line_with_bands(axes[ax], pro_imm_speeches_per_congress_by_party[party], anti_imm_speeches_per_congress_by_party[party], imm_speeches_per_congress_by_party[party], congress_range, years, party_to_color[party], label='Democrat', csv_out=os.path.join(outdir, 'overall_tone_by_congress_dem.csv'))
     party = 'R'
-    plot_percent_diff_line_with_bands(axes[ax], pro_imm_speeches_per_congress_by_party[party], anti_imm_speeches_per_congress_by_party[party], imm_speeches_per_congress_by_party[party], congress_range, years, party_to_color[party], label='Republican')
+    plot_percent_diff_line_with_bands(axes[ax], pro_imm_speeches_per_congress_by_party[party], anti_imm_speeches_per_congress_by_party[party], imm_speeches_per_congress_by_party[party], congress_range, years, party_to_color[party], label='Republican', csv_out=os.path.join(outdir, 'overall_tone_by_congress_rep.csv'))
     add_labels_to_plot(axes[ax], years, lower, upper, ylabel='% Pro - % Anti speeches', title='Net tone of immigration speeches in Congress by party')
+
+    with open(os.path.join(outdir, 'tone_data_by_congress.json'), 'w') as f:
+        json.dump({
+            'years': years,
+            'congresses': congress_range,
+            'pro_imm_speeches_per_congress': pro_imm_speeches_per_congress,
+            'anti_imm_speeches_per_congress': anti_imm_speeches_per_congress,
+            'imm_speeches_per_congress': imm_speeches_per_congress,
+            'pro_imm_speeches_per_congress_by_party': pro_imm_speeches_per_congress_by_party,
+            'anti_imm_speeches_per_congress_by_party': anti_imm_speeches_per_congress_by_party,
+            'imm_speeches_per_congress_by_party': imm_speeches_per_congress_by_party,
+        }, f, indent=2)
 
     # by president
     ax = 1
@@ -394,7 +405,7 @@ def main():
             pres_pro_by_congress = {y: n_pro for y in president_years}
             pres_anti_by_congress = {y: n_anti for y in president_years}
             n_tones_by_congress = {y: n_tones for y in president_years}
-        plot_percent_diff_line_with_bands(axes[ax], pres_pro_by_congress, pres_anti_by_congress, n_tones_by_congress, president_years, president_years, party_to_color[party], label=None)
+        plot_percent_diff_line_with_bands(axes[ax], pres_pro_by_congress, pres_anti_by_congress, n_tones_by_congress, president_years, president_years, party_to_color[party], label=None, csv_out=os.path.join(outdir, f'tone_by_president_{person.replace(" ", "_")}.csv'))
         mean_tone = (sum(pro_tones_by_president[person].values()) - sum(anti_tones_by_president[person].values())) / sum(tones_by_president[person].values())
 
         if start > 1880:
@@ -631,12 +642,15 @@ def plot_bg_fill(ax, periods, lower, upper, party_to_color):
         ax.fill_between([start-0.5, end-0.5], [lower, lower], [upper, upper], color=party_to_color[party], alpha=0.1)
 
 
-def plot_percent_line_with_bands(ax, numerator, denominator, keys, xvals, color, label, line_alpha=1.0, fill_alpha=0.2):
+def plot_percent_line_with_bands(ax, numerator, denominator, keys, xvals, color, label, line_alpha=1.0, fill_alpha=0.2, csv_out=None):
     series = np.array([numerator[k] / denominator[k] for k in keys])
     ns = np.array([denominator[k] for k in keys])
     std_pro = np.sqrt(series * (1-series) / ns)
     ax.plot(xvals, 100 * series, label=label, c=color, linewidth=1, alpha=line_alpha)
-    ax.fill_between(xvals, 100 * (series - 2 * std_pro), 100 * (series + 2 * std_pro), color=color, alpha=fill_alpha)
+    ax.fill_between(xvals, 100 * (series - 2 * std_pro), 100 * (series + 2 * std_pro), color=color, alpha=fill_alpha)    
+    if csv_out is not None:
+        df_out = pd.DataFrame({'year': xvals, 'percent': 100 * series, 'lower': 100 * (series - 2 * std_pro), 'upper': 100 * (series + 2 * std_pro)})
+        df_out.to_csv(csv_out, index=False)
 
 
 def plot_percent_diff_line_with_bands(ax, numerator1, numerator2, denominator, keys, xvals, color, label, line_alpha=1.0, fill_alpha=0.2, linestyle='-', bands=True, linewidth=1):
