@@ -176,6 +176,7 @@ def main():
     # aggregate the tones per speech along various dimensions
     n_excluded = 0
     for i, congress in tqdm(enumerate(congresses), total=len(congresses)):
+        congress = int(congress)
         speech_id = str(imm_speech_id_list[i])
         if speech_id in to_exclude:
             n_excluded += 1
