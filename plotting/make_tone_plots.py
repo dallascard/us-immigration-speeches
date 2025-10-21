@@ -147,8 +147,8 @@ def main():
     top_20_speakers = target_speakers[:20]
     top_20_speaker_set = set(top_20_speakers)
 
-    imm_speeches_per_congress = Counter(congresses)
-    imm_speeches_per_decade = Counter(congresses)
+    imm_speeches_per_congress = Counter([int(c) for c in congresses])
+    imm_speeches_per_decade = Counter([int(c) for c in congresses])
     pro_imm_speeches_per_congress = Counter()
     anti_imm_speeches_per_congress = Counter()
     neutral_imm_speeches_per_congress = Counter()
