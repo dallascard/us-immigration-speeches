@@ -119,7 +119,7 @@ def get_regions_and_regionalities():
     return regions, regionalities
 
 
-def add_american():
+def add_american(nationalities):
     # add American and Americans to appropriate terms, and create replacements
     american_terms = {}
     substitutions = {}

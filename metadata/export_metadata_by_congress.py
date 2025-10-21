@@ -8,11 +8,13 @@ from tqdm import tqdm
 
 
 def main():
-    usage = "%prog outdir"
+    usage = "%prog"
     parser = OptionParser(usage=usage)
     parser.add_option('--hein-bound-dir', type=str, default='data/speeches/Congress/hein-bound/',
                       help='Issue: default=%default')
     parser.add_option('--hein-daily-dir', type=str, default='data/speeches/Congress/hein-daily/',
+                      help='Issue: default=%default')
+    parser.add_option('--outdir', type=str, default='data/speeches/Congress/metadata/',
                       help='Issue: default=%default')
     parser.add_option('--first', type=int, default=43,
                       help='First congress: default=%default')
@@ -23,10 +25,9 @@ def main():
 
     (options, args) = parser.parse_args()
 
-    outdir = args[0]
-
     hein_bound_dir = options.hein_bound_dir
     hein_daily_dir = options.hein_daily_dir
+    outdir = options.outdir
     first = options.first
     last = options.last
 

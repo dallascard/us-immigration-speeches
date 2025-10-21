@@ -59,8 +59,9 @@ There are parallel scripts for processing each part of the data. Steps include p
 
 For the Hein Bound data:
 
-- `python -m parsing.tokenize_hein`: tokenize the Heind data (from Stanford) using spacy. Also drop speeches from one day with corrupted data, and repair false sentence breaks. THIS WILL TAKE A LONG TIME. You will need to set the `--hein-bound-dir` `--hein-daily-dir`, and `--outdir` command line arguments.
+- `python -m parsing.tokenize_hein`: tokenize the Hein data (from Stanford) using spacy. Also drop speeches from one day with corrupted data, and repair false sentence breaks. THIS WILL TAKE A LONG TIME. You will need to set the `--hein-bound-dir` `--hein-daily-dir`, and `--outdir` command line arguments.
 - `python -m parsing.rejoin_into_pieces_by_congress`: split speeches into segments. Set `--hein-dir` to `--outdir` from `tokenize_hein`.
+- `python -m metadata.export_metadata_by_congress`: also export the metadata
 
 For USCR:
 
@@ -69,6 +70,7 @@ For USCR:
 - `python -m parsing.preprocess_uscr`: adjust the text of USCR to more closely match the Gentzkow data (remove apostrophes, hyphens and speaker names)
 - `python -m parsing.tokenize_uscr`: output tokenized version of USCR (sentences and tokens)
 - `python -m parsing.rejoin_into_pieces_by_congress_uscr`: rejoin tokenized sentences into longer segments for classification
+- `python -m metadata.export_metadata_by_congress_uscr`: also export the metadata
 
 For Presidential data:
 
@@ -116,7 +118,7 @@ To re-aggregate the annotations (exported above), use the abel-aggregation repo 
 
 Then, back in the project directory for this repo (us-immigration-speeches), using your standard environment, run:
 - `python -m relevance.make_relevance_splits --text-file data/annotations/relevance_and_tone/early/texts.json --probs-file data/annotations/relevance_and_tone/early/relevance/item_probs.json --outdir data/annotations/relevance_and_tone/early/relevance/splits/`: Collect the tokenizations and estimated label probabilities, and make splits. (Repeat for the other paritions, using `make_relevance_splits_mid` and `make_relevance_splits_modern`)
-- `python -m relevance.make_tone_splits --extra-data-file data/annotations/relevance_and_tone/mfc/mfc_imm_tone.jsonlist`: Divide the annotated data with inferred labels into train, dev, and test files for model training, and include the additional annotations from Media Frames Corpus
+- `python -m tone.make_tone_splits --extra-data-file data/annotations/relevance_and_tone/mfc/mfc_imm_tone.jsonlist`: Divide the annotated data with inferred labels into train, dev, and test files for model training, and include the additional annotations from Media Frames Corpus
 
 ### Training models
 

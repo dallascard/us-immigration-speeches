@@ -9,9 +9,11 @@ from tqdm import tqdm
 
 
 def main():
-    usage = "%prog outdir"
+    usage = "%progr"
     parser = OptionParser(usage=usage)
     parser.add_option('--uscr-dir', type=str, default='data/speeches/Congress/uscr/',
+                      help='Issue: default=%default')
+    parser.add_option('--outdir', type=str, default='data/speeches/Congress/metadata/',
                       help='Issue: default=%default')
     parser.add_option('--people-file', type=str, default='data/speeches/Congress/uscr-legistlators/legislators-all.json',
                       help='Issue: default=%default')
@@ -24,9 +26,8 @@ def main():
 
     (options, args) = parser.parse_args()
 
-    outdir = args[0]
-
     uscr_dir = options.uscr_dir
+    outdir = options.outdir    
     people_file = options.people_file
     first = options.first
     last = options.last

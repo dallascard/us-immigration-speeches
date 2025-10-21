@@ -16,13 +16,13 @@ def main():
     parser = OptionParser(usage=usage)
     parser.add_option('--imm-file', type=str, default='data/speeches/Congress/imm_segments_with_tone_and_metadata.jsonlist',
                       help='Imm segments file: default=%default')
-    parser.add_option('--hein-dir', type=str, default='data/speeche/Congress/hein-bound_tokenized/',
+    parser.add_option('--hein-dir', type=str, default='data/speeches/Congress/hein-bound_tokenized/',
                       help='Hein tokenized dir: default=%default')
-    parser.add_option('--uscr-dir', type=str, default='data/speeche/Congress/uscr_tokenized/',
+    parser.add_option('--uscr-dir', type=str, default='data/speeches/Congress/uscr_tokenized/',
                       help='USCR tokenized dir: default=%default')
-    parser.add_option('--metadata-dir', type=str, default='data/speeche/Congress/metadata/',
+    parser.add_option('--metadata-dir', type=str, default='data/speeches/Congress/metadata/',
                       help='Metadata directory: default=%default')
-    parser.add_option('--procedural-file', type=str, default='data/speeche/Congress/procedural_speech_ids.txt',
+    parser.add_option('--procedural-file', type=str, default='data/speeches/Congress/procedural_speech_ids.txt',
                       help='File with list of procdeural speeches: default=%default')
     parser.add_option('--outdir', type=str, default='data/speeche/Congress/basic_counts/',
                       help='Output dir: default=%default')
