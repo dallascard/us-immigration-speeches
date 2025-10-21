@@ -367,9 +367,9 @@ def main():
     add_labels_to_plot(axes[ax], years, lower, upper, ylabel='% Pro - % Anti speeches', title='Net tone of immigration speeches in Congress by party')
 
     with open(os.path.join(outdir, 'tone_data_by_congress.json'), 'w') as f:
-        print(type(list(pro_imm_speeches_per_congress.keys()))[0])
-        print(type(list(anti_imm_speeches_per_congress.keys()))[0])
-        print(type(list(imm_speeches_per_congress.keys()))[0])
+        print(type(list(pro_imm_speeches_per_congress.keys())[0]))
+        print(type(list(anti_imm_speeches_per_congress.keys())[0]))
+        print(type(list(imm_speeches_per_congress.keys())[0]))
         print(list(imm_speeches_per_congress_by_party['D'].keys()))
         print(list(pro_imm_speeches_per_congress_by_party['D'].keys()))
         print(list(anti_imm_speeches_per_congress_by_party['D'].keys()))
