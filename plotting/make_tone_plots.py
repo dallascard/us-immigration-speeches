@@ -653,7 +653,8 @@ def plot_percent_line_with_bands(ax, numerator, denominator, keys, xvals, color,
         df_out.to_csv(csv_out, index=False)
 
 
-def plot_percent_diff_line_with_bands(ax, numerator1, numerator2, denominator, keys, xvals, color, label, line_alpha=1.0, fill_alpha=0.2, linestyle='-', bands=True, linewidth=1):
+def plot_percent_diff_line_with_bands(ax, numerator1, numerator2, denominator, keys, xvals, color, label, line_alpha=1.0, fill_alpha=0.2, linestyle='-', bands=True, linewidth=1, csv_out=None):
+
     series1 = np.array([numerator1[k] / denominator[k] for k in keys])
     series2 = np.array([numerator2[k] / denominator[k] for k in keys])
     series = series1-series2
@@ -664,6 +665,9 @@ def plot_percent_diff_line_with_bands(ax, numerator1, numerator2, denominator, k
     ax.plot(xvals, 100 * series, label=label, c=color, linewidth=linewidth, alpha=line_alpha, linestyle=linestyle)
     if bands:    
         ax.fill_between(xvals, 100 * (series - 2 * std), 100 * (series + 2 * std), color=color, alpha=fill_alpha)
+    if csv_out is not None:
+        df_out = pd.DataFrame({'year': xvals, 'percent': 100 * series, 'lower': 100 * (series - 2 * std), 'upper': 100 * (series + 2 * std)})
+        df_out.to_csv(csv_out, index=False)
 
 
 def scatter_percent_diff(ax, numerator1, numerator2, denominator, keys, xvals, color, label, size=15):
