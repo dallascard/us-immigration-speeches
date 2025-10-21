@@ -380,6 +380,7 @@ def main():
 
     # by president
     ax = 1
+    presidential_dfs = []
     plot_percent_diff_line_with_bands(axes[ax], pro_imm_speeches_per_congress, anti_imm_speeches_per_congress, imm_speeches_per_congress, congress_range, years, 'k', label=None, fill_alpha=0.1, line_alpha=0.5, linestyle='-.')
     # presidents to plot per congress rather than overall
     recent_presidents = {'Donald J. Trump', 'Barack Obama', 'George W. Bush', 'William J. Clinton', 'George Bush',
@@ -406,8 +407,10 @@ def main():
             pres_pro_by_congress = {y: n_pro for y in president_years}
             pres_anti_by_congress = {y: n_anti for y in president_years}
             n_tones_by_congress = {y: n_tones for y in president_years}
-        plot_percent_diff_line_with_bands(axes[ax], pres_pro_by_congress, pres_anti_by_congress, n_tones_by_congress, president_years, president_years, party_to_color[party], label=None, csv_out=os.path.join(outdir, f'tone_by_president_{person.replace(" ", "_")}.csv'))
+        pres_df = plot_percent_diff_line_with_bands(axes[ax], pres_pro_by_congress, pres_anti_by_congress, n_tones_by_congress, president_years, president_years, party_to_color[party], label=None, return_df=True)
+        pres_df['Name'] = person
         mean_tone = (sum(pro_tones_by_president[person].values()) - sum(anti_tones_by_president[person].values())) / sum(tones_by_president[person].values())
+        presidential_dfs.append(pres_df)
 
         if start > 1880:
             if mean_tone > 0:
@@ -418,6 +421,8 @@ def main():
 
     plt.savefig(os.path.join(outdir, 'main_tone_plot.png'), bbox_inches='tight')
     plt.savefig(os.path.join(outdir, 'main_tone_plot.pdf'), bbox_inches='tight')
+    presidential_df = pd.concat(presidential_dfs)
+    presidential_df.to_csv(os.path.join(outdir, 'tone_by_president_all.csv'))
 
     # make overall frequency plot
     fig, axes = plt.subplots(nrows=3, figsize=(12, 9))
@@ -654,7 +659,7 @@ def plot_percent_line_with_bands(ax, numerator, denominator, keys, xvals, color,
         df_out.to_csv(csv_out, index=False)
 
 
-def plot_percent_diff_line_with_bands(ax, numerator1, numerator2, denominator, keys, xvals, color, label, line_alpha=1.0, fill_alpha=0.2, linestyle='-', bands=True, linewidth=1, csv_out=None):
+def plot_percent_diff_line_with_bands(ax, numerator1, numerator2, denominator, keys, xvals, color, label, line_alpha=1.0, fill_alpha=0.2, linestyle='-', bands=True, linewidth=1, csv_out=None, return_df=False):
 
     series1 = np.array([numerator1[k] / denominator[k] for k in keys])
     series2 = np.array([numerator2[k] / denominator[k] for k in keys])
@@ -669,6 +674,8 @@ def plot_percent_diff_line_with_bands(ax, numerator1, numerator2, denominator, k
     if csv_out is not None:
         df_out = pd.DataFrame({'year': xvals, 'percent': 100 * series, 'lower': 100 * (series - 2 * std), 'upper': 100 * (series + 2 * std)})
         df_out.to_csv(csv_out, index=False)
+    if return_df:
+        return df_out
 
 
 def scatter_percent_diff(ax, numerator1, numerator2, denominator, keys, xvals, color, label, size=15):
