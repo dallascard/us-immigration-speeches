@@ -671,8 +671,8 @@ def plot_percent_diff_line_with_bands(ax, numerator1, numerator2, denominator, k
     ax.plot(xvals, 100 * series, label=label, c=color, linewidth=linewidth, alpha=line_alpha, linestyle=linestyle)
     if bands:    
         ax.fill_between(xvals, 100 * (series - 2 * std), 100 * (series + 2 * std), color=color, alpha=fill_alpha)
+    df_out = pd.DataFrame({'year': xvals, 'percent': 100 * series, 'lower': 100 * (series - 2 * std), 'upper': 100 * (series + 2 * std)})
     if csv_out is not None:
-        df_out = pd.DataFrame({'year': xvals, 'percent': 100 * series, 'lower': 100 * (series - 2 * std), 'upper': 100 * (series + 2 * std)})
         df_out.to_csv(csv_out, index=False)
     if return_df:
         return df_out
