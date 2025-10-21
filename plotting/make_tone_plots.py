@@ -123,7 +123,7 @@ def main():
     imm_speech_id_list = list(df['speech_id'].values)
 
     congresses = list(df['congress'].values)
-    parties = list(df['party'].values)
+    parties = [str(p) for p in list(df['party'].values)]
     speakers = list(df['speaker'].values)
     states = list(df['state'].values)
     imm_speech_id_list = list(df['speech_id'].values)
