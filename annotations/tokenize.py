@@ -44,8 +44,6 @@ def main():
     print("Loading spacy")
     nlp = spacy.load("en_core_web_sm")
 
-    renames = ['segment', 'congress', 'year', 'text', 'immigration', 'topic', 'tone', 'character', 'notes']
-
     text_by_id = {}
 
     for r in range(first_round, last_round+1):
@@ -54,11 +52,8 @@ def main():
         else:
             files = glob.glob(basedir + '/round_' + str(r) + '*/*.csv')
         for f in files:
-            df = pd.read_csv(f, header=0, sep='\t')
-            columns = list(df.columns)
-            columns[:len(renames)] = renames
-            df.columns = columns            
-            item_ids = df['segment'].values
+            df = pd.read_csv(f, header=0, index_col=0)
+            item_ids = df['id'].values
             texts = df['text'].values
             congresses = df['congress'].values
             if 'p_immigration' not in df.columns:
@@ -68,7 +63,7 @@ def main():
                 phase = 2
             sample_probs = df['p_immigration'].values
             for i, item_id in enumerate(item_ids):
-                text_by_id[item_id] = {'text': texts[i], 'round': r, 'congress': congresses[i], 'sample_prob': float(sample_probs[i]), 'phase': phase}
+                text_by_id[item_id] = {'text': texts[i], 'round': r, 'congress': congresses[i], 'sample_prob': sample_probs[i], 'phase': phase}
         print(r, len(text_by_id))
 
     lines = {}
