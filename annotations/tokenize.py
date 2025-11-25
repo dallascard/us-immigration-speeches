@@ -14,7 +14,7 @@ from tqdm import tqdm
 def main():
     usage = "%prog"
     parser = OptionParser(usage=usage)
-    parser.add_option('--basedir', type=str, default='data/annotations/relevance_and_tone/',
+    parser.add_option('--basedir', type=str, default='data/',
                       help='Basedir with data from repo distribution: default=%default')
     parser.add_option('--subset', type=str, default='early',
                       help='Subset to tokenize [early|mid|modern]: default=%default')
@@ -50,9 +50,9 @@ def main():
 
     for r in range(first_round, last_round+1):
         if r < 10:
-            files = glob.glob(basedir + '/round_0' + str(r) + '*/*.tsv')
+            files = glob.glob(basedir + '/round_0' + str(r) + '*/*.csv')
         else:
-            files = glob.glob(basedir + '/round_' + str(r) + '*/*.tsv')
+            files = glob.glob(basedir + '/round_' + str(r) + '*/*.csv')
         for f in files:
             df = pd.read_csv(f, header=0, sep='\t')
             columns = list(df.columns)
