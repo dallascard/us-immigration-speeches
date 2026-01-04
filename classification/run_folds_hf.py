@@ -166,7 +166,7 @@ def run_folds(basedir, seed=42, model_type='bert', model_name_or_path='bert-base
 def run_nontest(basedir, seed=42, model_type='bert', model_name_or_path='bert-base-uncased', tokenizer_name='', lr=2e-5, max_seq_length=400, per_gpu=4, n_epochs=7, train_file='nontest.jsonlist', output_prefix=None):
 
     name = os.path.basename(basedir)
-    folds_dir = os.path.join(basedir)
+    folds_dir = os.path.join(basedir, 'nontest')
 
     if output_prefix is None:
         part1, part2 = os.path.split(model_name_or_path)
