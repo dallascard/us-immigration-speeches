@@ -4,7 +4,7 @@ from optparse import OptionParser
 import numpy as np
 
 #from bert.run import run
-from classification.run_folds_hf import run_folds
+from classification.run_folds_hf import run_folds, run_nontest
 
 
 # SAME AS run_search, but updating to use stuff in the hf directory, updated to newer version of transformers
@@ -78,6 +78,17 @@ def main():
                       per_gpu=per_gpu,
                       n_epochs=n_epochs)
 
+            run_nontest(basedir=os.path.join(basedir, split),
+                      seed=seed,
+                      model_type=model_type,
+                      model_name_or_path=model_name_or_path,
+                      tokenizer_name=tokenizer_name,
+                      folds=folds,
+                      start_fold=0,
+                      lr=lr,
+                      max_seq_length=max_seq_length,
+                      per_gpu=per_gpu,
+                      n_epochs=n_epochs)
 
 if __name__ == '__main__':
     main()
