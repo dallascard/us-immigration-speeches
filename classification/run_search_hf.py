@@ -83,8 +83,6 @@ def main():
                       model_type=model_type,
                       model_name_or_path=model_name_or_path,
                       tokenizer_name=tokenizer_name,
-                      folds=folds,
-                      start_fold=0,
                       lr=lr,
                       max_seq_length=max_seq_length,
                       per_gpu=per_gpu,
