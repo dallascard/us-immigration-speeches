@@ -190,6 +190,8 @@ def run_nontest(basedir, seed=42, model_type='bert', model_name_or_path='bert-ba
               }
 
     outdir = os.path.join(folds_dir, output_prefix)
+    if not os.path.exists(outdir):
+        os.makedirs(outdir)
 
     cmd = ['python', '-m', 'hf.run',
             '--model_type', model_type,
