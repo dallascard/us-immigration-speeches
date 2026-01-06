@@ -225,6 +225,7 @@ def run_nontest(basedir, seed=42, model_type='bert', model_name_or_path='bert-ba
     cmd = ['python', '-m', 'hf.run',
             '--model_type', model_type,
             '--name', name,
+            '--train', train_file,
             '--do_eval',
             '--pred_file_name', "test_preds",
             '--data_dir', os.path.join(folds_dir),
