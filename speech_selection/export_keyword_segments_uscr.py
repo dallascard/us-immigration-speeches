@@ -19,6 +19,10 @@ def main():
                       help='USCR directory: default=%default')
     parser.add_option('--outfile', type=str, default='data/keyword-segments/keyword_segments_uscr_104-116.jsonlist',
                       help='Output directory: default=%default')
+    parser.add_option('--first', type=int, default=104,
+                      help='Output directory: default=%default')
+    parser.add_option('--last', type=int, default=116,
+                      help='Output directory: default=%default')
     parser.add_option('--use-sents', action="store_true", default=False,
                       help='Use sentences rather than tokens (avoid excess spaces): default=%default')
 
@@ -32,8 +36,8 @@ def main():
     if not os.path.exists(outdir):
         os.makedirs(outdir)
 
-    first = 104
-    last = 116
+    first = options.first
+    last = options.last
     files = []
     for congress in range(first, last+1):
         files.append(os.path.join(uscr_dir, 'speeches_' + str(congress).zfill(3) + '.jsonlist'))
