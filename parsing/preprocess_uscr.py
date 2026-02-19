@@ -17,11 +17,14 @@ def main():
                       help='Download directory for USCR repo: default=%default')
     parser.add_option('--outdir', type=str, default='data/uscr-preprocessed/',
                       help='Download directory for USCR repo: default=%default')
+    parser.add_option('--skip-normalize', action="store_true", default=False,
+                      help='Don\'t normalize text: default=%default')
 
     (options, args) = parser.parse_args()
 
     indir = options.indir
     outdir = options.outdir
+    skip_normalize = options.skip_normalize
 
     if not os.path.exists(outdir):
         os.makedirs(outdir)
@@ -41,7 +44,8 @@ def main():
             # remove speaker name from start of speech
             assert text[:len(speaker)] == speaker
             text = text[len(speaker)+1:].strip()
-            text = normalize_to_stanford(text)
+            if not skip_normalize:
+                text = normalize_to_stanford(text)
             line['text'] = text
             outlines.append(line)
 
