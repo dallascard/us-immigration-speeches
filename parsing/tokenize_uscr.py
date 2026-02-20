@@ -53,7 +53,7 @@ def main():
             tokens = []
             for sent in parsed.sents:
                 if skip_normalize:
-                    sents.append(text)
+                    sents.append(sent.text)
                     tokens.append([token.text for token in sent])
                 if not skip_normalize:
                     # convert commas to periods to match the Gentzkow data
