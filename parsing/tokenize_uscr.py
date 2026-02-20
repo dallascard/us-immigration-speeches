@@ -19,8 +19,8 @@ def main():
                       help='First congress [104-116]: default=%default')
     parser.add_option('--last', type=int, default=116,
                       help='Last congress [104-116]: default=%default')
-    #parser.add_option('--by-issue', action="store_true", default=False,
-    #                  help='Divide data by issue: default=%default')
+    parser.add_option('--skip-normalize', action="store_true", default=False,
+                      help='Don\'t normalize text: default=%default')
 
     (options, args) = parser.parse_args()
 
@@ -28,6 +28,7 @@ def main():
     outdir = options.outdir
     first = options.first
     last = options.last
+    skip_normalize = options.skip_normalize
 
     if not os.path.exists(outdir):
         os.makedirs(outdir)
@@ -51,10 +52,14 @@ def main():
             sents = []
             tokens = []
             for sent in parsed.sents:
-                # convert commas to periods to match the Gentzkow data
-                text = re.sub(r',', '.', sent.text)
-                sents.append(text)
-                tokens.append([re.sub(r',', '.', token.text) for token in sent])
+                if skip_normalize:
+                    sents.append(text)
+                    tokens.append([token.text for token in sent])
+                if not skip_normalize:
+                    # convert commas to periods to match the Gentzkow data
+                    text = re.sub(r',', '.', sent.text)
+                    sents.append(text)
+                    tokens.append([re.sub(r',', '.', token.text) for token in sent])
 
             assert len(sents) == len(tokens)
 
