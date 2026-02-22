@@ -23,6 +23,10 @@ def main():
                       help='Output directory: default=%default')
     parser.add_option('--last', type=int, default=116,
                       help='Output directory: default=%default')
+    parser.add_option('--preceeding', type=int, default=3,
+                      help='Number of preceeding sentences to include: default=%default')
+    parser.add_option('--following', type=int, default=3,
+                      help='Number of following sentences to include: default=%default')
     parser.add_option('--use-sents', action="store_true", default=False,
                       help='Use sentences rather than tokens (avoid excess spaces): default=%default')
 
