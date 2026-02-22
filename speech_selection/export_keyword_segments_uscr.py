@@ -35,6 +35,8 @@ def main():
     uscr_dir = options.uscr_dir
     outfile = options.outfile
     use_sents = options.use_sents
+    n_preceeding = options.preceeding
+    n_following = options.following
 
     outdir = os.path.dirname(outfile)
     if not os.path.exists(outdir):
@@ -76,7 +78,7 @@ def main():
             for sent_i, tokens in enumerate(tokenized_sents):
                 match = match_tokens(tokens, modern)
                 if match:
-                    chunk = ' '.join(sents[max(0, sent_i-3): min(n_sents, sent_i+4)])
+                    chunk = ' '.join(sents[max(0, sent_i-n_preceeding): min(n_sents, sent_i+n_following+1)])
                     outlines.append({'infile': basename, 'id': str(line_id) + '_' + str(sent_i), 'text': chunk})
                     chunk_lengths.update([len(chunk.split())])
                     count += 1
